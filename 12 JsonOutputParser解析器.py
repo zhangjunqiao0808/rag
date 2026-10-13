@@ -15,7 +15,7 @@ first_prompt = PromptTemplate.from_template(
 
 second_prompt = PromptTemplate.from_template("职业：{job},请简要介绍这个职业优劣势。")
 
-model = ChatTongyi(model="qwen3-max")
+model = ChatTongyi(model="qwen-plus")
 
 chain = first_prompt | model | json_parser | second_prompt | model | str_parser
 

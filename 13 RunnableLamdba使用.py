@@ -3,7 +3,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_community.chat_models.tongyi import ChatTongyi
 from langchain_core.runnables import RunnableLambda
 
-model = ChatTongyi(model="qwen3-max")
+model = ChatTongyi(model="qwen-plus")
 str_parser = StrOutputParser()
 firstPrompt = PromptTemplate.from_template(
     "我的邻居姓{lastname},刚生了{gender},请帮忙起名字，仅生成一个名字，并告知我，不要加其他信息"
