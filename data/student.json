@@ -1,0 +1,9 @@
+ {
+   "name": "A",
+   "age": 17,
+   "gender": "男",
+   "hobby": ["jump","sing","rap"],
+   "dic": {
+
+   }
+ }

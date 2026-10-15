@@ -1,0 +1,291 @@
+Python 语法和基本使用（入门笔记）
+
+1. 基本规则
+Python 使用缩进表示代码块，通常使用四个空格。大小写有区别，例如 name 和 Name 是两个不同的变量。
+使用 # 编写单行注释。字符串可以使用单引号或双引号，多行字符串可以使用三引号。
+
+print("你好，Python！")  # 输出文本
+if True:
+    print("这行属于 if 代码块")
+
+2. 变量和基本类型
+变量赋值不需要提前声明类型。变量名不能以数字开头，也不能使用 Python 关键字。
+
+name = "张三"       # str：字符串
+age = 20            # int：整数
+price = 19.9        # float：浮点数
+is_student = True   # bool：布尔值，True 或 False
+result = None       # None：表示没有值
+
+print(type(age))     # <class 'int'>
+number = int("123")  # 字符串转换为整数
+text = str(123)      # 整数转换为字符串
+
+3. 输入和输出
+input() 返回字符串。如果需要数字，需要进行类型转换；输入不合法时，转换可能报错。
+
+name = input("请输入姓名：")
+print(f"你好，{name}！")
+print("Python", "入门", sep=" - ")
+
+4. 运算符
+算术运算：+ 加、- 减、* 乘、/ 除、// 向下取整除、% 取余、** 幂。
+比较运算：== 等于、!= 不等于、> 大于、< 小于、>= 大于等于、<= 小于等于。
+逻辑运算：and 与、or 或、not 非。
+成员判断：in、not in。身份判断：is、is not。
+= 用于赋值，== 用于比较值；判断是否为 None 通常使用 is None。
+
+print(7 / 2)        # 3.5
+print(7 // 2)       # 3
+print(7 % 2)        # 1
+print(2 ** 3)       # 8
+print(age >= 18 and is_student)
+print(result is None)  # True
+
+5. 字符串
+字符串是不可变的序列，索引从 0 开始，负数索引从末尾开始。
+切片形式为 [开始:结束:步长]，包含开始位置，不包含结束位置。
+
+text = "Python"
+print(text[0])              # P
+print(text[-1])             # n
+print(text[0:3])            # Pyt
+print(text.lower())         # python
+print("  hello  ".strip())  # hello
+print("a,b,c".split(","))   # ['a', 'b', 'c']
+print("-".join(["a", "b"])) # a-b
+print(f"姓名：{name}，年龄：{age}")
+
+6. 列表 list
+列表是有序、可修改的容器，可以包含重复元素。
+
+items = ["苹果", "香蕉", "橙子"]
+items.append("葡萄")           # 追加一个元素
+items.extend(["西瓜", "梨"])  # 追加可迭代对象中的各个元素
+items[0] = "草莓"              # 修改元素
+items.remove("香蕉")           # 删除第一个匹配项，不存在时会报错
+last_item = items.pop()        # 删除并返回最后一个元素
+print(items[0:2])
+print(len(items))
+
+7. 元组 tuple
+元组是有序容器，创建后不能增删或替换其中的元素。
+元组中如果包含列表等可变对象，这些对象自身的内容仍然可以修改。
+
+point = (10, 20)
+x, y = point          # 拆包
+single = (1,)         # 单元素元组必须有逗号
+print(point[0])       # 10
+
+8. 字典 dict
+字典保存键值对，键必须是可哈希对象，例如字符串、整数。
+字典键不能重复，对已有键赋值会更新对应的值。
+
+person = {"name": "张三", "age": 20}
+print(person["name"])
+print(person.get("city", "未知"))  # 键不存在时使用默认值
+person["age"] = 21
+person["city"] = "北京"
+for key, value in person.items():
+    print(key, value)
+
+9. 集合 set
+集合中的元素不重复，不支持按索引访问，也不保证迭代顺序。
+空集合使用 set() 创建，{} 创建的是空字典。
+
+numbers = {1, 2, 2, 3}
+numbers.add(4)
+numbers.discard(2)   # 删除元素，不存在时不会报错
+print(3 in numbers) # True
+print({1, 2} & {2, 3})  # 交集：{2}
+print({1, 2} | {2, 3})  # 并集：{1, 2, 3}，显示顺序可能不同
+
+10. 条件判断
+if、elif、else 用于根据条件执行不同代码。
+None、False、数值 0、空字符串和空容器通常在条件判断中视为假。
+
+score = 85
+if score >= 90:
+    print("优秀")
+elif score >= 60:
+    print("及格")
+else:
+    print("不及格")
+
+11. 循环
+for 用于遍历可迭代对象；while 在条件为真时重复执行。
+break 结束当前循环，continue 跳过当前这次循环的剩余代码。
+range(开始, 结束, 步长) 不包含结束值。
+
+for i in range(3):
+    print(i)  # 依次输出 0、1、2
+
+for index, fruit in enumerate(["苹果", "香蕉"], start=1):
+    print(index, fruit)
+
+count = 0
+while count < 3:
+    count += 1
+    if count == 2:
+        continue
+    print(count)  # 输出 1、3
+
+12. 函数和返回值
+def 定义函数，return 返回结果。没有执行带值的 return 时，函数返回 None。
+参数可以有默认值；调用时可以按位置传参，也可以按参数名传参。
+类型注解帮助理解和检查代码，通常不会在运行时自动强制检查类型。
+
+def add(a: int, b: int = 0) -> int:
+    return a + b
+
+print(add(2, 3))       # 5
+print(add(a=2, b=3))   # 5
+
+def greet(name: str) -> None:
+    print(f"你好，{name}")
+
+value = greet("张三")
+print(value)          # None
+
+避免使用可变对象作为需要每次独立创建的默认参数：
+
+def collect(value, items=None):
+    if items is None:
+        items = []
+    items.append(value)
+    return items
+
+13. 列表推导式
+用于简洁地根据现有数据生成新列表。
+
+squares = [n * n for n in range(5)]
+evens = [n for n in range(10) if n % 2 == 0]
+print(squares)  # [0, 1, 4, 9, 16]
+print(evens)    # [0, 2, 4, 6, 8]
+
+14. 异常处理
+try 中放可能失败的操作，except 处理指定异常，finally 中的代码在离开结构时执行。
+
+try:
+    number = int("abc")
+except ValueError:
+    print("无法转换为整数")
+finally:
+    print("处理结束")
+
+15. 文件读写
+使用 with 管理文件，可以在代码块结束时自动关闭文件。
+r 表示读取，w 表示写入并覆盖原有内容，a 表示在末尾追加。
+处理中文文本时建议明确指定 encoding="utf-8"。
+以下示例会在当前工作目录创建或覆盖 example.txt，请在练习目录运行。
+
+with open("example.txt", "w", encoding="utf-8") as file:
+    file.write("你好，Python！\n")
+
+with open("example.txt", "r", encoding="utf-8") as file:
+    content = file.read()
+    print(content)
+
+16. 路径操作
+相对路径基于当前工作目录解析，不一定是脚本所在目录。
+Windows 路径可以使用原始字符串 r"..."，避免反斜杠被解释为转义字符。
+
+from pathlib import Path
+
+data_dir = Path(r"D:\PYcharm\rag\data")
+file_path = data_dir / "python.txt"
+print(file_path.exists())
+text = file_path.read_text(encoding="utf-8")
+print(text[:100])
+
+17. 模块和包
+import 导入模块，from ... import ... 导入指定成员。
+标准库随 Python 提供；第三方包通常需要通过 pip 安装。
+
+import math
+from pathlib import Path
+
+print(math.sqrt(16))  # 4.0
+
+在终端中执行以下命令，而不是直接写进 Python 源码：
+python --version
+python -m pip --version
+python -m pip install requests
+python your_script.py
+
+18. 类、对象和 self
+类定义对象的属性和行为。__init__ 在实例初始化时执行。
+self 是实例方法中表示当前对象的惯用参数名。
+
+class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def introduce(self):
+        return f"我叫{self.name}，今年{self.age}岁"
+
+student = Student("张三", 20)
+print(student.name)
+print(student.introduce())
+
+在 __init__ 中，name 是局部参数，self.name 是保存在对象上的属性。
+执行 self.name = name 后，两者引用同一个值；之后重新给其中一个赋值，不会自动同步另一个。
+其他实例方法可以通过 self.name 访问保存的属性。
+
+19. JSON 数据
+JSON 常用于存储和交换数据。dumps 把 Python 对象转换为 JSON 字符串，loads 执行反向转换。
+
+import json
+
+data = {"name": "张三", "age": 20}
+json_text = json.dumps(data, ensure_ascii=False)
+parsed = json.loads(json_text)
+print(parsed["name"])
+
+20. CSV 数据
+CSV 是文本表格格式，可以使用标准库 csv 读取。
+使用 csv 模块处理引号、逗号和字段内换行，不要简单按逗号拆分整行。
+
+import csv
+
+with open(r"D:\PYcharm\rag\data\csvloader_test.csv", "r", encoding="utf-8", newline="") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        print(row["title"], row["content"])
+
+21. 常用内置函数
+len(data)：获取长度。
+type(value)：查看类型。
+isinstance(value, int)：判断对象是否属于指定类型。
+str(value)、int(value)、float(value)：进行类型转换。
+sum(numbers)：求和。
+min(numbers)、max(numbers)：获取最小值和最大值。
+sorted(data)：返回排序后的新列表。
+enumerate(data)：遍历时同时获取索引和元素。
+zip(a, b)：配对遍历，默认在最短的输入耗尽时停止。
+
+22. 程序入口
+下面的结构可以让代码只在直接运行当前文件时执行，导入该模块时不执行这个代码块。
+
+def main():
+    print("开始运行程序")
+
+if __name__ == "__main__":
+    main()
+
+23. 常见错误
+SyntaxError：语法错误，例如缺少冒号。
+IndentationError：缩进不正确。
+NameError：使用了没有定义的名字。
+TypeError：类型或操作不匹配。
+ValueError：类型合适但值不符合要求，例如 int("abc")。
+IndexError：序列索引超出范围。
+KeyError：访问了字典中不存在的键。
+FileNotFoundError：指定路径的文件不存在。
+ModuleNotFoundError：找不到要导入的模块，需要检查环境或安装情况。
+
+24. 学习建议
+先掌握变量、容器、条件、循环和函数，再学习文件操作、异常处理和类。
+本文件是分章节的说明和独立示例，不是可以整体运行的 Python 脚本。
+练习时将需要的示例复制到 .py 文件中，运行并观察结果。
