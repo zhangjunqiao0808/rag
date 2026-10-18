@@ -1,0 +1,4 @@
+# 20 示例的 Windows Python 后端依赖（Python 3.12）。
+chromadb==1.5.9
+chroma-hnswlib==0.7.5
+langchain-chroma==0.2.4
